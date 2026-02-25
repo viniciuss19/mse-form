@@ -191,11 +191,29 @@ placeholder="Repetir Senha">
 
 </div>
 
-<button type="submit">
+<div class="form-actions">
+<button type="submit" class="btn-primario">
 <?= $fornecedor ? 'Atualizar' : 'Cadastrar' ?>
 </button>
+</div>
 
 </form>
+
+<div class="extra-box">
+    <h3>Para ser um Fornecedor MSE</h3>
+    <a href="index.php" class="btn-secundario">Cadastre-se aqui</a>
+</div>
+
+
+<div class="extra-box">
+    <h3>Você é colaborador da MSE?</h3>
+    <p>Faça login utilizando sua conta corporativa</p>
+
+    <a href="google-login.php" class="btn-google">
+        <img src="https://developers.google.com/identity/images/g-logo.png" width="18">
+        Entrar com Google
+    </a>
+</div>
 
 <br>
 <a href="read.php">Ver Fornecedores Cadastrados</a>
