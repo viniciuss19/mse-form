@@ -88,7 +88,6 @@
 </div>
 </div>
 
-]
 <div class="center">
 <h3>Fornecedor de:</h3>
 
