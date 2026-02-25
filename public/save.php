@@ -54,6 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ':nome_usuario' => $_POST['nome_usuario'],
         ':senha' => $senhaHash
     ]);
-
-    echo "Cadastro realizado com sucesso!";
+    
+   header("Location: read.php");
+exit;
+    
 }

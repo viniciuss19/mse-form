@@ -1,124 +1,206 @@
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="UTF-8">
-    <title>Cadastro Fornecedor</title>
+<?php
+require __DIR__ . '/../config/db.php';
 
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/script.js" defer></script>
+$fornecedor = null;
 
-    </head>
-    <body>
+if (isset($_GET['id'])) {
+    $stmt = $pdo->prepare("SELECT * FROM fornecedores WHERE id = ?");
+    $stmt->execute([$_GET['id']]);
+    $fornecedor = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+?>
 
-    <h2 class=container>Portal MSE</h2>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cadastro Fornecedor</title>
 
-    <div class="container">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/script.js" defer></script>
 
+</head>
+<body>
 
-    <form id="formSupplier" method="POST" action="save.php">
+<h2 class="container">Portal MSE</h2>
 
-    <div class="row">
+<div class="container">
 
+<form method="POST" 
+      action="<?= $fornecedor ? 'update.php' : 'save.php' ?>">
 
-    <div class="col">
-    <h3>Pessoa Jurídica</h3>
+<?php if ($fornecedor): ?>
+<input type="hidden" name="id" value="<?= $fornecedor['id'] ?>">
+<?php endif; ?>
 
-    <input type="text" id="cnpj_empresa" name="cnpj_empresa" required placeholder="CNPJ">
-    <input type="text" name="nome_fantasia" placeholder="Nome Fantasia">
+<div class="row">
 
-    <label>ICMS:</label>
-    <input type="text" name="icms" placeholder="ICMS">
-    <input type="text" name="telefone" placeholder="Telefone">
+<!-- ================= ESQUERDA ================= -->
+<div class="col">
+<h3>Pessoa Jurídica</h3>
 
-    <input type="text" id="endereco" name="endereco" disabled placeholder="Endereço">
-    <input type="text" id="complemento" name="complemento" disabled placeholder="Complemento">
+<input type="text" name="cnpj_empresa"
+value="<?= $fornecedor['cnpj_empresa'] ?? '' ?>"
+required placeholder="CNPJ">
 
-    <select id="pais" name="pais" disabled >
-    <option value="Brasil">Brasil</option>
-    </select>
+<input type="text" name="nome_fantasia"
+value="<?= $fornecedor['nome_fantasia'] ?? '' ?>"
+placeholder="Nome Fantasia">
 
-    <input type="text" id="cep" name="cep" disabled placeholder="CEP">
+<label>ICMS:</label>
+<input type="text" name="icms"
+value="<?= $fornecedor['icms'] ?? '' ?>"
+placeholder="ICMS">
 
-    </div>
+<input type="text" name="telefone"
+value="<?= $fornecedor['telefone'] ?? '' ?>"
+placeholder="Telefone">
 
-    <div class="col">
-    <h3>Fornecedor</h3>
+<input type="text" name="endereco"
+value="<?= $fornecedor['endereco'] ?? '' ?>"
+placeholder="Endereço">
 
-    <input type="text" name="razao_social" required placeholder="Razão Social">
+<input type="text" name="complemento"
+value="<?= $fornecedor['complemento'] ?? '' ?>"
+placeholder="Complemento">
 
-    <input type="text" name="inscricao_estadual" placeholder="Inscrição Estadual / Isento">
+<select name="pais">
+<option value="Brasil" selected>Brasil</option>
+</select>
 
-    <label>Situação:</label>
-    <input type="text" name="situacao" placeholder="Situação">
-    <input type="email" name="email" required placeholder="E-mail">
+<input type="text" name="cep"
+value="<?= $fornecedor['cep'] ?? '' ?>"
+placeholder="CEP">
 
-    <input type="text" name="numero" placeholder="Número">
-    <input type="text" name="bairro" placeholder="Bairro">
+</div>
 
-    <select name="estado" placeholder="Selecione o Estado">
-    <option value="PR">PR</option>
-    <option value="SP">SP</option>
-    <option value="RJ">RJ</option>
-    <option value="MG">MG</option>
+<!-- ================= DIREITA ================= -->
+<div class="col">
+<h3>Fornecedor</h3>
 
-    </select>
+<input type="text" name="razao_social"
+value="<?= $fornecedor['razao_social'] ?? '' ?>"
+required placeholder="Razão Social">
 
-    <select name="municipio" placeholder="Município">
-    <option value="Londrina">Londrina</option>
-    </select>
+<input type="text" name="inscricao_estadual"
+value="<?= $fornecedor['inscricao_estadual'] ?? '' ?>"
+placeholder="Inscrição Estadual / Isento">
 
-    </div>
-    </div>
+<label>Situação:</label>
+<input type="text" name="situacao"
+value="<?= $fornecedor['situacao'] ?? '' ?>"
+placeholder="Situação">
 
-    <div class="center">
-    <h3>Fornecedor de:</h3>
+<input type="email" name="email"
+value="<?= $fornecedor['email'] ?? '' ?>"
+required placeholder="E-mail">
 
-    <div class="checkbox-group">
-    <label><input type="checkbox" name="servicos"> Serviços</label>
-    <label><input type="checkbox" name="materiais"> Materiais</label>
-    <label><input type="checkbox" name="locacao"> Locação</label>
-    </div>
+<input type="text" name="numero"
+value="<?= $fornecedor['numero'] ?? '' ?>"
+placeholder="Número">
 
-    <label>Ramo de Atuação:</label>
-    <select name="ramo_atuacao">
-    <option>Construção Civil</option>
-    <option>Elétrica</option>
-    <option>Hidráulica</option>
-    <option>Logística</option>
-    <option>TI</option>
-    </select>
+<input type="text" name="bairro"
+value="<?= $fornecedor['bairro'] ?? '' ?>"
+placeholder="Bairro">
 
-    </div>
+<select name="estado">
+<option value="PR" <?= ($fornecedor['estado'] ?? '') == 'PR' ? 'selected' : '' ?>>PR</option>
+<option value="SP" <?= ($fornecedor['estado'] ?? '') == 'SP' ? 'selected' : '' ?>>SP</option>
+<option value="RJ" <?= ($fornecedor['estado'] ?? '') == 'RJ' ? 'selected' : '' ?>>RJ</option>
+<option value="MG" <?= ($fornecedor['estado'] ?? '') == 'MG' ? 'selected' : '' ?>>MG</option>
+</select>
 
-    <hr>
+<select name="municipio">
+<option value="Londrina"
+<?= ($fornecedor['municipio'] ?? '') == 'Londrina' ? 'selected' : '' ?>>
+Londrina
+</option>
+</select>
 
-    <div class="row">
+</div>
+</div>
 
-    <div class="col">
-    <input type="text" name="cnpj_login" required placeholder="CNPJ">
+<!-- ================= CENTRAL ================= -->
+<div class="center">
 
-    <div class="password-wrapper">
-    <input type="password" name="senha" id="senha" required placeholder="Senha">
-    <span onclick="toggleSenha('senha')">👁</span>
-    </div>
-    </div>
+<h3>Fornecedor de:</h3>
 
-    <div class="col">
-    <input type="text" name="nome_usuario" required placeholder="Nome">
+<div class="checkbox-group">
+<label>
+<input type="checkbox" name="servicos"
+<?= !empty($fornecedor['servicos']) ? 'checked' : '' ?>>
+Serviços
+</label>
 
-    <div class="password-wrapper">
-    <input type="password" id="confirmarSenha" required placeholder="Repetir Senha">
-    <span onclick="toggleSenha('confirmarSenha')">👁</span>
-    </div>
-    </div>
+<label>
+<input type="checkbox" name="materiais"
+<?= !empty($fornecedor['materiais']) ? 'checked' : '' ?>>
+Materiais
+</label>
 
-    </div>
+<label>
+<input type="checkbox" name="locacao"
+<?= !empty($fornecedor['locacao']) ? 'checked' : '' ?>>
+Locação
+</label>
+</div>
 
-    <button type="submit">Cadastrar</button>
+<label>Ramo de Atuação:</label>
+<select name="ramo_atuacao">
+<?php
+$ramos = ['Construção Civil','Elétrica','Hidráulica','Logística','TI'];
+foreach ($ramos as $ramo):
+?>
+<option value="<?= $ramo ?>"
+<?= ($fornecedor['ramo_atuacao'] ?? '') == $ramo ? 'selected' : '' ?>>
+<?= $ramo ?>
+</option>
+<?php endforeach; ?>
+</select>
 
-    </form>
-    </div>
+</div>
 
-    </body>
-    </html>
+<hr>
+
+<div class="row">
+
+<div class="col">
+<input type="text" name="cnpj_login"
+value="<?= $fornecedor['cnpj_login'] ?? '' ?>"
+required placeholder="CNPJ">
+
+<div class="password-wrapper">
+<input type="password" name="senha" id="senha"
+placeholder="Senha">
+<span onclick="toggleSenha('senha')">👁</span>
+</div>
+</div>
+
+<div class="col">
+<input type="text" name="nome_usuario"
+value="<?= $fornecedor['nome_usuario'] ?? '' ?>"
+required placeholder="Nome">
+
+<div class="password-wrapper">
+<input type="password" id="confirmarSenha"
+placeholder="Repetir Senha">
+<span onclick="toggleSenha('confirmarSenha')">👁</span>
+</div>
+</div>
+
+</div>
+
+<button type="submit">
+<?= $fornecedor ? 'Atualizar' : 'Cadastrar' ?>
+</button>
+
+</form>
+
+<br>
+<a href="read.php">Ver Fornecedores Cadastrados</a>
+
+</div>
+
+</body>
+</html>
