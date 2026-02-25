@@ -1,22 +1,19 @@
 <?php
-class Database {
-    private $host = "localhost";
-    private $db_name = "mse_fornecedores";
-    private $username = "root";
-    private $password = "";
-    public $conn;
 
-    public function getConnection() {
-        try {
-            $this->conn = new PDO(
-                "mysql:host={$this->host};dbname={$this->db_name}",
-                $this->username,
-                $this->password
-            );
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-            die("Erro de conexão: " . $e->getMessage());
-        }
-        return $this->conn;
-    }
-}  
+$host = "localhost";
+$db   = "mse_form";
+$user = "root";
+$pass = "190705";
+
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$db;charset=utf8mb4",
+        $user,
+        $pass
+    );
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch (PDOException $e) {
+    die("Erro na conexão: " . $e->getMessage());
+}

@@ -7,7 +7,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#formFornecedor").submit(function (e) {
+  $("#formSupplier").submit(function (e) {
     if ($("#senha").val() !== $("#confirmarSenha").val()) {
       alert("As senhas não coincidem.");
       e.preventDefault();
