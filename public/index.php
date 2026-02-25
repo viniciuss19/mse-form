@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
 <div class="col">
 <h3>Pessoa Jurídica</h3>
 
-<input type="text" name="cnpj_empresa"
+<input type="text" name="cnpj_empresa" 
 value="<?= $fornecedor['cnpj_empresa'] ?? '' ?>"
 required placeholder="CNPJ">
 
