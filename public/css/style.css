@@ -45,6 +45,7 @@ select:disabled {
 .checkbox-group {
   display: flex;
   gap: 20px;
+  justify-content: center;
 }
 
 button {
