@@ -11,8 +11,10 @@
 </head>
 <body>
 
+<h2 class=container>Portal MSE</h2>
+
 <div class="container">
-<h2>Cadastro de Fornecedor</h2>
+
 
 <form id="formFornecedor" method="POST" action="salvar.php">
 
@@ -22,57 +24,39 @@
 <div class="col">
 <h3>Pessoa Jurídica</h3>
 
-<label>CNPJ</label>
-<input type="text" id="cnpj_empresa" name="cnpj_empresa" required>
+<input type="text" id="cnpj_empresa" name="cnpj_empresa" required placeholder="CNPJ">
+<input type="text" name="nome_fantasia" placeholder="Nome Fantasia">
 
-<label>Nome Fantasia</label>
-<input type="text" name="nome_fantasia">
+<label>ICMS:</label>
+<input type="text" name="icms" placeholder="ICMS">
+<input type="text" name="telefone" placeholder="Telefone">
 
-<label>ICMS</label>
-<input type="text" name="icms">
+<input type="text" id="endereco" name="endereco" disabled placeholder="Endereço">
+<input type="text" id="complemento" name="complemento" disabled placeholder="Complemento">
 
-<label>Telefone</label>
-<input type="text" name="telefone">
-
-<label>Endereço</label>
-<input type="text" id="endereco" name="endereco" disabled>
-
-<label>Complemento</label>
-<input type="text" id="complemento" name="complemento" disabled>
-
-<label>País</label>
-<select id="pais" name="pais" disabled>
+<select id="pais" name="pais" disabled >
 <option value="Brasil">Brasil</option>
 </select>
 
-<label>CEP</label>
-<input type="text" id="cep" name="cep" disabled>
+<input type="text" id="cep" name="cep" disabled placeholder="CEP">
 
 </div>
 
 <div class="col">
 <h3>Fornecedor</h3>
 
-<label>Razão Social</label>
-<input type="text" name="razao_social" required>
+<input type="text" name="razao_social" required placeholder="Razão Social">
 
-<label>Inscrição Estadual / Isento</label>
-<input type="text" name="inscricao_estadual">
+<input type="text" name="inscricao_estadual" placeholder="Inscrição Estadual / Isento">
 
-<label>Situação</label>
-<input type="text" name="situacao">
+<label>Situação:</label>
+<input type="text" name="situacao" placeholder="Situação">
+<input type="email" name="email" required placeholder="E-mail">
 
-<label>E-mail</label>
-<input type="email" name="email" required>
+<input type="text" name="numero" placeholder="Número">
+<input type="text" name="bairro" placeholder="Bairro">
 
-<label>Número</label>
-<input type="text" name="numero">
-
-<label>Bairro</label>
-<input type="text" name="bairro">
-
-<label>Estado</label>
-<select name="estado">
+<select name="estado" placeholder="Selecione o Estado">
 <option value="PR">PR</option>
 <option value="SP">SP</option>
 <option value="RJ">RJ</option>
@@ -80,8 +64,7 @@
 
 </select>
 
-<label>Município</label>
-<select name="municipio">
+<select name="municipio" placeholder="Município">
 <option value="Londrina">Londrina</option>
 </select>
 
@@ -97,7 +80,7 @@
 <label><input type="checkbox" name="locacao"> Locação</label>
 </div>
 
-<label>Ramo de Atuação</label>
+<label>Ramo de Atuação:</label>
 <select name="ramo_atuacao">
 <option>Construção Civil</option>
 <option>Elétrica</option>
@@ -113,23 +96,19 @@
 <div class="row">
 
 <div class="col">
-<label>CNPJ</label>
-<input type="text" name="cnpj_login" required>
+<input type="text" name="cnpj_login" required placeholder="CNPJ">
 
 <div class="password-wrapper">
-<label>Senha</label>
-<input type="password" name="senha" id="senha" required>
+<input type="password" name="senha" id="senha" required placeholder="Senha">
 <span onclick="toggleSenha('senha')">👁</span>
 </div>
 </div>
 
 <div class="col">
-<label>Nome</label>
-<input type="text" name="nome_usuario" required>
+<input type="text" name="nome_usuario" required placeholder="Nome">
 
 <div class="password-wrapper">
-<label>Repetir Senha</label>
-<input type="password" id="confirmarSenha" required>
+<input type="password" id="confirmarSenha" required placeholder="Repetir Senha">
 <span onclick="toggleSenha('confirmarSenha')">👁</span>
 </div>
 </div>
